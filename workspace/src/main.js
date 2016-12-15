@@ -6,11 +6,15 @@ import goods from 'components/goods/goods'
 import seller from 'components/seller/seller'
 import ratings from 'components/ratings/ratings'
 
+import 'common/sass/index.scss'
+
 Vue.use(VueRouter)
 /* eslint-disable no-new*/
 let app = Vue.extend(App)
 
-let router = new VueRouter()
+let router = new VueRouter({
+	linkActiveClass: 'active'
+})
 
 router.map({
 	'/goods': {
@@ -26,3 +30,4 @@ router.map({
 })
 
 router.start(app, '#app')
+router.go('/goods')
