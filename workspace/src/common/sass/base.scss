@@ -7,10 +7,10 @@
     }
 }
 
-@media all {
+@media (-webkit-min-device-pixel-radio:2),(min-device-pixel-radio:2) {
     .border-1px {
         &::after {
-            -webkit-transform:scaleY(0.7);
+            -webkit-transform:scaleY(0.5);
             transform: scaleY(0.5);
         }
     }
