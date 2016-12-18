@@ -17,7 +17,7 @@
                     <span class="text"> {{ seller.supports[0].description}}</span>
                 </div>
             </div>
-            <div class="support-count">
+            <div class="support-count" v-if="seller.supports" v-on:click="showDetail">
                 <span class="count">{{ seller.supports.length }}个</span>
                 <i class="icon-keyboard_arrow_right"></i>
             </div>
@@ -28,6 +28,18 @@
         </div>
         <div class="background">
             <img :src="seller.avatar" width="100%" height="100%">
+        </div>
+        <div v-show="detailShow" class="detail">
+            <div class="detail-wrapper clearfix">
+                <div class="detail-main">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+            </div>
+            <div class="detail-close">
+                <i class="icon-close"></i>
+            </div>
         </div>
     </div>
 </template>
@@ -40,6 +52,16 @@ export default {
     },
     created () {
         this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
+    },
+    data () {
+        return {
+            detailShow: false
+        }
+    },
+    methods: {
+        showDetail () {
+            this.detailShow = true
+        }
     }
 }
 </script>
@@ -51,6 +73,7 @@ export default {
         position: relative;
         background-color: rgba(7,17,27,0.5);
         color: #fff;
+        overflow: hidden;
         .content-wrapper {
             font-size: 0;
             padding: 24px 12px 18px 24px;
@@ -125,7 +148,7 @@ export default {
             .support-count {
                 position: absolute;
                 right: 12px;
-                bottom: 14px;
+                bottom: 12px;
                 padding: 0 8px;
                 height: 24px;
                 line-height: 24px;
@@ -154,7 +177,7 @@ export default {
             .bulletin-title {
                 display: inline-block;
                 vertical-align: top;
-                margin-top: 9px;
+                margin-top: 10px;
                 width: 22px;
                 height: 12px;
                 @include bg-img('bulletin');
@@ -182,7 +205,32 @@ export default {
             z-index: -1;
             filter: blur(10px);
         }
-
+        .detail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(7,17,27,0.8);
+            .detail-wrapper {
+                min-height: 100%;
+                .detail-main {
+                    margin-top: 64px;
+                    padding-bottom: 64px;
+                }
+            }
+            .detail-close {
+                position: relative;
+                width: 32px;
+                height: 32px;
+                font-size: 32px;
+                margin: -64px auto 0 auto;
+                clear: both;
+                color: rgba(255,255,255,0.5);
+            }
+        }
     }
 
 </style>

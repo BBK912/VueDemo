@@ -39,9 +39,8 @@
         }
     }
 </script>
-<style lang="scss" rel="stylesheet/scss" scoped>
+<style lang="scss" rel="stylesheet/scss" >
     @import "common/sass/mixin.scss";
-
     .tab {
         display: flex;
         width: 100%;
