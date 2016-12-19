@@ -29,21 +29,35 @@
         <div class="background">
             <img :src="seller.avatar" width="100%" height="100%">
         </div>
-        <div v-show="detailShow" class="detail">
+        <div v-show="detailShow" class="detail" transition="fade">
             <div class="detail-wrapper clearfix">
                 <div class="detail-main">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <h1 class="name">{{ seller.name }}</h1>
+                    <div class="star-wrapper">
+                        <star :size="48" :score="seller.score"></star>
+                    </div>
+                    <title :text="'优惠信息'"></title>
+                    <ul  v-if="seller.supports" class="supports">
+                        <li class="support-item" v-for="item in seller.supports">
+                            <span class="icon" :class="classMap[seller.supports[$index].type]"></span>
+                            <span class="text">{{ seller.supports[$index].description }}</span>
+                        </li>
+                    </ul>
+                    <title :text="'商家公告'"></title>
+                    <div class="bulletin" >
+                        <p class="content"> {{seller.bulletin}}</p>
+                    </div>
                 </div>
             </div>
-            <div class="detail-close">
+            <div class="detail-close" @click="hideDetail">
                 <i class="icon-close"></i>
             </div>
         </div>
     </div>
 </template>
 <script>
+import star from 'components/star/star'
+import title from 'components/title/title'
 export default {
     props: {
         seller: {
@@ -61,7 +75,14 @@ export default {
     methods: {
         showDetail () {
             this.detailShow = true
+        },
+        hideDetail () {
+            this.detailShow = false
         }
+    },
+    components: {
+        star,
+        title
     }
 }
 </script>
@@ -213,12 +234,83 @@ export default {
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(7,17,27,0.8);
+            transition: all 0.3s;
+            // backdrop-filter:blur(10px);
+            &.fade-transition {
+                opacity: 1;
+                background-color: rgba(7,17,27,0.8);
+            }
+            &.fade-enter, &.fade-leave {
+                opacity: 0;
+                background-color: rgba(7,17,27,0);
+            }
             .detail-wrapper {
                 min-height: 100%;
+                width: 100%;
                 .detail-main {
                     margin-top: 64px;
                     padding-bottom: 64px;
+                    .name {
+                        font-size: 16px;
+                        font-weight: 700;
+                        line-height: 16px;
+                        text-align: center;
+                    }
+                    .star-wrapper {
+                        margin-top: 16px;
+                        padding: 2px 0;
+                        text-align: center;
+                    }
+
+                    .supports {
+                        width: 80%;
+                        margin: 0 auto;
+                        .support-item {
+                            padding: 0 12px;
+                            margin-bottom: 12px;
+                            font-size: 0;
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+                            .icon {
+                                display: inline-block;
+                                width: 16px;
+                                height: 16px;
+                                vertical-align: top;
+                                margin-right: 6px;
+                                background-repeat: no-repeat;
+                                background-size: 16px 16px;
+                                &.decrease {
+                                    @include bg-img(decrease_2);
+                                }
+                                &.discount {
+                                    @include bg-img(discount_2);
+                                }
+                                &.guarantee {
+                                    @include bg-img(guarantee_2);
+                                }
+                                &.invoice {
+                                    @include bg-img(invoice_2);
+                                }
+                                &.special {
+                                    @include bg-img(special_2);
+                                }
+                            }
+                            .text {
+                                line-height: 16px;
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                    .bulletin {
+                        width: 80%;
+                        margin: 0 auto;
+                        .content {
+                            padding: 0 12px;
+                            line-height: 24px;
+                            font-size: 12px;
+                        }
+                    }
                 }
             }
             .detail-close {
