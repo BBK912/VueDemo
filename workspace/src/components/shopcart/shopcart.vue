@@ -16,10 +16,13 @@
                 </div>
             </div>
             <div class="content-right">
-                <div class="pay">
+                <div class="pay" :class="{enough: totalPrice >= minPrice}">
                     {{payDesc}}
                 </div>
             </div>
+        </div>
+        <div class="ball-container">
+
         </div>
     </div>
 </template>
@@ -32,7 +35,7 @@ export default {
             default () {
                 return [{
                     price: 13,
-                    count: 2
+                    count: 0
                 }]
             }
         },
@@ -160,14 +163,17 @@ export default {
             .content-right {
                 flex: 0 0 105px;
                 width: 105px;
+                background-color: #2b333b;
                 .pay {
                     height: 48px;
-                    width: 100%;
                     line-height: 48px;
                     text-align: center;
                     font-size: 12px;
-                    font-weight: 400;
-                    background-color: #2b333b;
+                    font-weight: 700;
+                    &.enough {
+                        background-color: #00b43c;
+                        color: #fff;
+                    }
                 }
             }
         }
