@@ -2,9 +2,14 @@
   <div class="goods">
       <div class="menu-wrapper" v-el:menu-wrapper>
           <ul>
-              <li v-for="item in goods" class="menu-item" :class="{current: currentIndex === $index}" @click= "_selectMenu($index,$event)">
+              <li v-for="item in goods" class="menu-item"
+                  :class="{current: currentIndex === $index}"
+                  @click= "_selectMenu($index,$event)">
                   <span class="text">
-                      <span v-show="item.type > 0" class="icon" :class="classMap[item.type]"></span>
+                      <span v-show="item.type > 0" class="icon"
+                            :class="classMap[item.type]">
+
+                      </span>
                       {{item.name}}
                   </span>
               </li>
@@ -37,7 +42,12 @@
               </li>
           </ul>
       </div>
-      <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart>
+      <shopcart
+        :delivery-price="seller.deliveryPrice"
+        :min-price="seller.minPrice"
+        :select-foods="selectFoods">
+
+      </shopcart>
   </div>
 </template>
 
