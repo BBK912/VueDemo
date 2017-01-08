@@ -50,7 +50,7 @@ export default {
         .cart-decrease {
             display: inline-block;
             padding: 6px;
-            transition: all 0.4s linear;
+            transition: all 0.2s linear;
             &.move-transition {
                 opacity: 1;
                 transform: translate3d(0,0,0);
@@ -59,7 +59,7 @@ export default {
                     font-size: 24px;
                     line-height: 24px;
                     color: rgb(0,160,220);
-                    transition: all 0.4s linear;
+                    transition: all 0.2s linear;
                     transform: rotate(0);
                 }
             }
@@ -67,7 +67,7 @@ export default {
                 opacity: 0;
                 transform: translate3d(24px,0,0);
                 .inner {
-                    transition: all 0.4s linear;
+                    transition: all 0.2s linear;
                     transform: rotate(180deg);
                 }
             }
