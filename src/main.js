@@ -7,7 +7,7 @@ import seller from 'components/seller/seller'
 import ratings from 'components/ratings/ratings'
 
 import 'common/sass/index.scss'
-
+Vue.config.debug = true
 Vue.use(VueRouter)
 Vue.use(VueResource)
 /* eslint-disable no-new*/
